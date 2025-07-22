@@ -1,0 +1,381 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f6f8fb;
+    color: #222;
+    min-height: 100vh;
+}
+
+main.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 16px 40px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* Card style for all major sections */
+.card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 32px #0002, 0 1.5px 6px #4caf5012;
+    padding: 32px 36px;
+    margin-bottom: 0;
+    transition: box-shadow 0.2s;
+}
+.card:hover {
+    box-shadow: 0 8px 40px #0003, 0 2px 8px #4caf5020;
+}
+
+.process-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+    margin-bottom: 18px;
+}
+.process-flow-card {
+    padding-bottom: 18px;
+}
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    min-width: 110px;
+    position: relative;
+    transition: transform 0.2s;
+}
+.step.active {
+    transform: scale(1.10);
+    filter: drop-shadow(0 0 12px #4caf50cc);
+    z-index: 2;
+}
+.icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    background: #e0e7ef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    box-shadow: 0 2px 12px #0001;
+}
+.icon.laser {
+    background: linear-gradient(135deg, #f44336 60%, #fff0 100%);
+    box-shadow: 0 2px 16px #f4433640;
+}
+.icon.opto {
+    background: linear-gradient(135deg, #2196f3 60%, #fff0 100%);
+    box-shadow: 0 2px 16px #2196f340;
+}
+.icon.ladder {
+    background: linear-gradient(135deg, #4caf50 60%, #fff0 100%);
+    box-shadow: 0 2px 16px #4caf5040;
+}
+.caption {
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin-top: 4px;
+    letter-spacing: 0.01em;
+}
+.pulse {
+    width: 36px;
+    height: 10px;
+    border-radius: 5px;
+    background: #bdbdbd;
+    opacity: 0.25;
+    transition: background 0.2s, opacity 0.2s;
+}
+.pulse.active {
+    background: #4caf50;
+    opacity: 1;
+    box-shadow: 0 0 16px #4caf50cc;
+}
+.progress-bar-bg {
+    width: 100%;
+    height: 10px;
+    background: #e0e7ef;
+    border-radius: 5px;
+    margin: 20px 0 0 0;
+    overflow: hidden;
+}
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4caf50 60%, #81c784 100%);
+    width: 0%;
+    border-radius: 5px;
+    transition: width 0.5s cubic-bezier(.4,2,.6,1);
+}
+
+.status-panel {
+    display: flex;
+    gap: 32px;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-bottom: 0;
+}
+.status-panel-card {
+    padding-bottom: 18px;
+}
+.status-card, .indicator-card, .totals-card {
+    background: #f8fafc;
+    border-radius: 14px;
+    box-shadow: 0 2px 12px #0001;
+    padding: 22px 28px;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1 1 0;
+}
+.indicator-label {
+    font-size: 1.05rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+.ladder-indicator {
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding: 10px 0;
+    border-radius: 10px;
+    text-align: center;
+    background: #e0e7ef;
+    color: #222;
+    transition: background 0.3s, color 0.3s;
+    letter-spacing: 0.04em;
+}
+.ladder-indicator.on {
+    background: #4caf50;
+    color: #fff;
+    box-shadow: 0 0 10px #4caf50cc;
+}
+.ladder-indicator.off {
+    background: #e0e7ef;
+    color: #222;
+    box-shadow: none;
+}
+
+.totals-card {
+    background: #f4f8fc;
+    color: #333;
+}
+
+.controls-panel {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 0 0 0 0;
+}
+.controls-panel label {
+    font-size: 1.05rem;
+    color: #555;
+}
+.controls-panel input[type="number"] {
+    width: 70px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #bdbdbd;
+    font-size: 1.05rem;
+    margin-right: 10px;
+    background: #f8fafc;
+    transition: border 0.2s;
+}
+.controls-panel input[type="number"]:focus {
+    border: 1.5px solid #4caf50;
+    outline: none;
+}
+.controls-panel button {
+    font-size: 1.05rem;
+    padding: 10px 24px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px #4caf5020;
+}
+.primary-btn {
+    background: #4caf50;
+    color: #fff;
+}
+.primary-btn:active {
+    background: #388e3c;
+}
+.secondary-btn {
+    background: #bdbdbd;
+    color: #222;
+}
+.secondary-btn:active {
+    background: #757575;
+    color: #fff;
+}
+.icon-btn {
+    background: #2196f3;
+    color: #fff;
+    font-size: 1.3rem;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px #2196f320;
+}
+.icon-btn:active {
+    background: #1565c0;
+}
+
+.chart-panel {
+    background: none;
+    border-radius: 16px;
+    box-shadow: none;
+    padding: 0 0 0 0;
+    margin: 0 auto;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.chart-panel-card {
+    padding: 32px 36px 24px 36px;
+}
+.chart-panel h2 {
+    margin: 0 0 18px 0;
+    font-size: 1.25rem;
+    color: #333;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+.event-log-panel {
+    background: none;
+    border-radius: 16px;
+    box-shadow: none;
+    padding: 0 0 0 0;
+    margin: 0 auto;
+    max-width: 900px;
+}
+.event-log-panel-card {
+    padding: 32px 36px 24px 36px;
+}
+.event-log-panel h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 500;
+}
+.event-log-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 1rem;
+    color: #444;
+    max-height: 180px;
+    overflow-y: auto;
+    background: #f8fafc;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px #0001;
+    padding: 12px 18px;
+}
+.event-log-panel ul li {
+    margin-bottom: 4px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Help Modal */
+/* Improved Help Modal Styles */
+#help-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(30, 32, 40, 0.55);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+#help-modal .help-content {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 40px #0003, 0 2px 8px #4caf5020;
+    padding: 40px 48px 32px 48px;
+    max-width: 440px;
+    width: 92vw;
+    text-align: left;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    animation: modal-pop 0.18s cubic-bezier(.4,2,.6,1);
+}
+@keyframes modal-pop {
+    0% { transform: scale(0.92) translateY(30px); opacity: 0; }
+    100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+#close-help {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #f4433620;
+    transition: background 0.2s;
+    padding: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#close-help:active {
+    background: #b71c1c;
+}
+
+@media (max-width: 900px) {
+    main.container {
+        padding: 12px 2vw 24px 2vw;
+    }
+    .process-flow {
+        gap: 28px;
+    }
+    .card {
+        padding: 18px 8vw;
+    }
+    .chart-panel-card, .event-log-panel-card {
+        padding: 18px 8vw 12px 8vw;
+    }
+}
+
+@media (max-width: 700px) {
+    .process-flow {
+        flex-direction: column;
+        gap: 18px;
+    }
+    .status-panel {
+        flex-direction: column;
+        gap: 14px;
+    }
+    .controls-panel {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    .card {
+        padding: 12px 2vw;
+    }
+    .chart-panel-card, .event-log-panel-card {
+        padding: 12px 2vw 8px 2vw;
+    }
+}

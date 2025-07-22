@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenlight Demo</title>
+    <link rel="stylesheet" href="../src/style.css">
+</head>
+<body>
+    <main class="container">
+        <section class="card process-flow-card">
+            <div class="process-flow">
+                <div class="step" id="laser-step">
+                    <div class="icon laser"></div>
+                    <div class="caption">Laser</div>
+                </div>
+                <div class="pulse" id="pulse-laser-opto"></div>
+                <div class="step" id="opto-step">
+                    <div class="icon opto"></div>
+                    <div class="caption">Opto22 Node</div>
+                </div>
+                <div class="pulse" id="pulse-opto-ladder"></div>
+                <div class="step" id="ladder-step">
+                    <div class="icon ladder"></div>
+                    <div class="caption">Ladder Logic</div>
+                </div>
+            </div>
+            <div class="progress-bar-bg"><div class="progress-bar" id="progress-bar"></div></div>
+        </section>
+        <section class="card status-panel-card">
+            <div class="status-panel">
+                <div class="status-card">
+                    <div id="signal-status">No signal sent.</div>
+                    <div id="opto-status">Opto22 Node: Waiting...</div>
+                    <div id="binary-status">Binary Value: --</div>
+                    <div id="ladder-status">Ladder: No action.</div>
+                </div>
+                <div class="indicator-card">
+                    <div class="indicator-label">Ladder Output</div>
+                    <div class="ladder-indicator off" id="ladder-indicator">OFF</div>
+                </div>
+                <div class="totals-card">
+                    <div id="uptime-status">Uptime: 0 s</div>
+                    <div id="downtime-status">Downtime: 0 s</div>
+                    <div id="total-uptime">Total Uptime: 0 s</div>
+                    <div id="total-downtime">Total Downtime: 0 s</div>
+                </div>
+            </div>
+        </section>
+        <section class="card controls-panel-card">
+            <div class="controls-panel">
+                <label for="on-duration">ON Duration (s):</label>
+                <input type="number" id="on-duration" min="1" max="60" value="4">
+                <button id="send-signal" class="primary-btn">Send 24V Signal</button>
+                <button id="reset-demo" class="secondary-btn">Reset</button>
+                <button id="help-btn" class="icon-btn" aria-label="Show help">?</button>
+            </div>
+        </section>
+        <section class="card chart-panel-card">
+            <div class="chart-panel">
+                <h2>Last 30 Minutes Uptime</h2>
+                <canvas id="uptimeChart" width="900" height="160" aria-label="Uptime chart" role="img"></canvas>
+            </div>
+        </section>
+        <section class="card event-log-panel-card">
+            <div class="event-log-panel">
+                <h3>Event Log</h3>
+                <ul id="event-log"></ul>
+            </div>
+        </section>
+        <div id="help-modal" class="help-modal" style="display:none;">
+            <div class="help-content">
+                <button id="close-help" aria-label="Close help modal">&times;</button>
+                <h2>How Greenlight Works</h2>
+                <p>This demo shows how a 24V signal from a Laser is read by an Opto22 node, converted to a binary value (0/1), and used by ladder logic to track machine uptime and downtime. The visual flow, event log, and counters help you understand the process step by step.</p>
+            </div>
+        </div>
+    </main>
+    <script type="module" src="../src/app.js"></script>
+</body>
+</html>
