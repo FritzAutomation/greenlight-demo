@@ -56,18 +56,20 @@
                 <button id="help-btn" class="icon-btn" aria-label="Show help">?</button>
             </div>
         </section>
-        <section class="card chart-panel-card">
-            <div class="chart-panel">
-                <h2>Last 30 Minutes Uptime</h2>
-                <canvas id="uptimeChart" width="900" height="160" aria-label="Uptime chart" role="img"></canvas>
-            </div>
-        </section>
-        <section class="card event-log-panel-card">
-            <div class="event-log-panel">
-                <h3>Event Log</h3>
-                <ul id="event-log"></ul>
-            </div>
-        </section>
+        <div class="side-by-side-row">
+            <section class="card chart-panel-card">
+                <div class="chart-panel">
+                    <h2>Last 5 Minutes Uptime</h2>
+                    <canvas id="uptimeChart" width="900" height="160" aria-label="Uptime chart" role="img"></canvas>
+                </div>
+            </section>
+            <section class="card event-log-panel-card">
+                <div class="event-log-panel">
+                    <h3>Event Log</h3>
+                    <ul id="event-log"></ul>
+                </div>
+            </section>
+        </div>
         <div id="help-modal" class="help-modal" style="display:none;">
             <div class="help-content">
                 <button id="close-help" aria-label="Close help modal">&times;</button>
@@ -77,5 +79,25 @@
         </div>
     </main>
     <script type="module" src="app.js"></script>
+    <script>
+    // Ensure event log card matches chart card height for perfect alignment
+    function matchCardHeights() {
+        const chartCard = document.querySelector('.chart-panel-card');
+        const logCard = document.querySelector('.event-log-panel-card');
+        if (chartCard && logCard) {
+            logCard.style.height = '';
+            chartCard.style.height = '';
+            const chartHeight = chartCard.offsetHeight;
+            const logHeight = logCard.offsetHeight;
+            const maxHeight = Math.max(chartHeight, logHeight);
+            chartCard.style.height = maxHeight + 'px';
+            logCard.style.height = maxHeight + 'px';
+        }
+    }
+    window.addEventListener('DOMContentLoaded', matchCardHeights);
+    window.addEventListener('resize', matchCardHeights);
+    // Also call after chart updates
+    setInterval(matchCardHeights, 500);
+    </script>
 </body>
 </html>

@@ -10,7 +10,7 @@ let downtimeInterval = null;
 let onDuration = 4; // seconds
 let soundEnabled = true;
 // Chart.js uptime history
-let uptimeHistory = Array(30).fill(0); // 30 slots, 1 per minute
+let uptimeHistory = Array(15).fill(0); // 15 slots, 1 per minute
 let chart = null;
 let chartTimer = null;
 let currentUptime = 0;
@@ -141,7 +141,7 @@ function resetDemo() {
     updateTotals();
     startDowntime();
     // Reset chart
-    uptimeHistory = Array(30).fill(0);
+    uptimeHistory = Array(15).fill(0);
     if (chart) {
         chart.data.datasets[0].data = [...uptimeHistory];
         chart.update('none');
