@@ -9,13 +9,13 @@ export function loadChartJs(callback) {
     script.onload = callback;
     document.head.appendChild(script);
 }
-function getLast5MinuteLabels() {
+function getLast30MinuteLabels() {
     const now = new Date();
     const labels = [];
-    for (let i = 4; i >= 0; i--) {
+    for (let i = 29; i >= 0; i--) {
         const d = new Date(now.getTime() - i * 60000);
-        // Show label only for the first and last bar
-        if (i === 0 || i === 4) {
+        // Show label every 5 minutes, else blank
+        if (i % 5 === 0) {
             labels.push(d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
         } else {
             labels.push('');
@@ -28,10 +28,10 @@ export function createUptimeChart(ctx) {
     return new window.Chart(ctx, {
         type: 'bar',
         data: {
-            labels: getLast5MinuteLabels(),
+            labels: getLast30MinuteLabels(),
             datasets: [{
                 label: 'Running',
-                data: Array(5).fill(0), // 0 = off, 1 = running
+                data: Array(30).fill(0), // 0 = off, 1 = running
                 backgroundColor: function(context) {
                     const value = context.raw;
                     return value === 1 ? '#43a047' : '#fff';
@@ -75,6 +75,6 @@ export function createUptimeChart(ctx) {
 // Chart.js CDN loader for demo (remove if using npm)
 export function updateUptimeChartLabels(chart) {
     if (!chart) return;
-    chart.data.labels = getLast5MinuteLabels();
+    chart.data.labels = getLast30MinuteLabels();
     chart.update('none');
 }
